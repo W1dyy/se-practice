@@ -1,9 +1,0 @@
-| ID | User Story | Priority | Assumption |
-| :--- | :--- | :--- | :--- |
-| **US-01** | As a Student, I want to view room availability for specific dates and times, so that I can find a free study space that fits my schedule. | High | Room availability updates in real-time based on existing bookings and administrative blocks. |
-| **US-02** | As a Student, I want to book an available study room for a time slot, so that I can reserve a space for individual or group study. | High | Bookings must start in the future and cannot exceed 2 hours in duration. |
-| **US-03** | As a Student, I want to cancel my reservation, so that I can release the room for other students when I no longer need it. | Medium | Cancellation immediately frees the slot for other students to book. |
-| **US-04** | As a Student, I want to receive confirmation when I book or cancel a room, so that I have proof of my reservation status. | Low | Confirmations are generated in-app/email without sending SMS or push notifications. |
-| **US-05** | As an Administrator, I want to block a study room, so that I can take it out of service for maintenance or campus events. | High | Blocking a room rejects any new booking attempts for that room during the blocked period. |
-| **US-06** | As an Administrator, I want to unblock a study room, so that it can be restored to active service for student bookings. | Medium | Unblocking immediately makes the room visible and available in availability searches. |
-| **US-07** | As an Administrator, I want to review room usage over a period, so that I can analyze utilization trends and optimize room allocation. | Medium | Usage reports aggregate historical reservation logs across user-selected date ranges. |
