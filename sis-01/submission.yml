@@ -14,12 +14,12 @@ schema: 1
 assignment: "sis-01"            # do not edit
 
 student:
-  name:                         # as in the university register
-  student_id:                   # e.g. 24B031016
-  group:                        # your group code, as in the timetable
-  github:                       # username only, not a URL
+  name:                         Amir Bakhytzhan
+  student_id:                   24B031694
+  group:                        16:00-19:00
+  github:                       W1dyy
 
-topic:                          # one of 1.1 … 1.10 — the same as the **Topic:** line in report.md
+topic:                          1.10
 
 assistant:
   tool:                         # e.g. ChatGPT (web), Claude.ai, Gemini app, DeepSeek chat
@@ -30,7 +30,7 @@ checker:                        # from your LAST run of python tests/check_repor
   pass:
   fail:
   error:
-  commit:                       # git rev-parse --short HEAD, run right after that checker run
+  commit:                       5748129
 
 counts:                         # copy from the checker's output; the validator re-measures them
   main_words:                   # "main report (sections 1-4): N words"
