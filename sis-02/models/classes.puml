@@ -1,0 +1,50 @@
+@startuml
+
+class Student {
+    + studentId: String
+}
+
+class Course {
+    + code: String
+    + title: String
+}
+
+class CourseOffering {
+    + semester: String
+    + capacity: Integer
+    + availablePlaces: Integer
+}
+
+class Enrollment {
+    + registrationDate: Date
+}
+
+Course "1" -- "0..*" CourseOffering : offers >
+Student "1" -- "0..*" Enrollment : makes >
+CourseOffering "1" -- "0..*" Enrollment : contains >
+
+note top of CourseOffering
+  Capacity Constraint:
+  The number of Enrollments for a CourseOffering
+  must never exceed its defined capacity.
+end note
+
+note top of Enrollment
+  Uniqueness Constraint:
+  A Student may have at most one Enrollment
+  in the same CourseOffering.
+end note
+
+note as N1
+  **Assumptions:**
+  - The student is signed in and authenticated before interacting.
+  - Selected offerings exist in the database.
+  - Capacity is a positive whole number.
+  
+  **Technical Lifelines:**
+  - CatalogUI and RegistrationSystem (used in the sequence diagram)
+  are technical lifelines handling UI state and transaction routing. 
+  They are omitted here to focus strictly on domain classes.
+end note
+
+@enduml

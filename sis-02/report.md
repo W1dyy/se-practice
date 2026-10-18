@@ -174,15 +174,47 @@
 
 **Prompt:**
 
-~~~~text
-(paste here)
-~~~~
+Act as a requirements analyst. Use only this course registration scenario and rules R1–R5: A student browses an electronic course catalog, chooses a course offering and requests registration. Each offering has a limited number of places. A Course describes a subject. A Course Offering is one scheduled section in one semester. Registration always targets a specific offering. Assume that the student is signed in, the selected offering exists, and its capacity is a positive whole number. R1. Catalog: Show the course code, title, offering and available places for one semester. R2. Capacity: Recheck current availability when registering. Enrollment must never exceed the offering's capacity. R3. Duplicates: A student may have at most one enrollment in the same offering. Reject a repeat request. R4. Success: Create exactly one Enrollment linking the student and offering, update availability and return a confirmation. R5. Rejection: Explain "course full" or "already enrolled". Create no enrollment and leave the enrollment count unchanged. A catalog view does not reserve a place. Model the final checks and enrollment creation as one atomic operation, so competing requests cannot take the same last place. A note describing it is enough. Out of scope: payments, prerequisites, timetable clashes, waiting lists, cancellation. Use fictional students and courses. Treat any extra AI suggestion as a proposal you accept or reject explicitly. My initial assumptions are: **Scope:** This system allows a user to browse the movie schedule, check seat availability, and book a ticket for a specific showtime, while preventing double-booking of the same seat. Payments and food pre-orders are out of scope.
+
+**Assumptions:**
+
+1. The user is already logged into their cinema account.
+2. The selected movie showtime exists in the database..
+
+Draft 3 user stories and 2 Given / When / Then acceptance criteria for each. Use IDs US-01 to US-03 and AC-01 to AC-06. Map each criterion to rule IDs.
+Cover normal and rejection behavior. List uncertainty separately. Do not add excluded features or invent university policies.
+
 
 **Response:**
 
-~~~~text
-(paste here)
-~~~~
+US-01: Browse Course Catalog
+As a student, I want to browse the electronic course catalog for a semester so that I can see the available subjects and how many places are left.
+
+AC-01 [R1]: Given the student is viewing the catalog for a specific semester, When the page loads, Then the system shows the course code, title, offering, and available places.
+
+AC-02 [Scenario, R5]: Given a student is viewing the catalog, When they see available places for an offering, Then the system does not reserve a place or change the enrollment count until a registration request is explicitly made.
+
+US-02: Register for a Course Offering
+As a student, I want to register for a specific course offering so that I can secure an available place in the class.
+
+AC-03 [R2, R4]: Given the student is not currently enrolled in the selected offering and its current availability is greater than zero, When the student requests registration, Then the system creates exactly one Enrollment linking the student and offering, updates the available places, and returns a confirmation.
+
+AC-04 [Scenario, R2]: Given a course offering has exactly one place remaining, When the student requests registration, Then the system executes the final availability check and enrollment creation as one atomic operation to ensure the capacity is never exceeded.
+
+US-03: Registration Validation and Rejection
+As a student, I want to receive clear feedback if my registration fails so that I know why I was not enrolled.
+
+AC-05 [R2, R5]: Given the current availability of the selected course offering is zero, When the student requests registration, Then the system explains "course full", creates no enrollment, and leaves the enrollment count unchanged.
+
+AC-06 [R3, R5]: Given the student already has an existing enrollment in the selected course offering, When the student requests registration for that same offering, Then the system explains "already enrolled", creates no enrollment, and leaves the enrollment count unchanged.
+
+Uncertainty
+
+UI Semester Selection: The scenario states the catalog shows offerings "for one semester," but it is uncertain if the student explicitly filters by semester or if the system defaults to the upcoming one.
+
+Concurrent Read/Write Performance: While the final check and creation are atomic, it is uncertain how aggressively the catalog view should cache "available places" versus querying real-time data, potentially leading to a high rate of "course full" rejections during peak registration times.
+
+Assumptions Conflict: The provided initial assumptions (Scope and Assumptions) referenced a cinema/movie schedule system. These were ignored to strictly adhere to the provided course registration scenario and rules R1-R5.
 
 ### B2 — UML drafts (Prompt B)
 
@@ -193,9 +225,33 @@
 
 **Prompt:**
 
-~~~~text
-(paste here)
-~~~~
+Using my approved scenario, R1-R5, stories and criteria below, return separate PlantUML code blocks for a sequence diagram and a domain class diagram.
+
+Sequence: include catalog browsing and guarded success, full-course and duplicate outcomes. Model final checks and creation as one atomic operation.
+
+Class: show domain concepts, useful attributes and multiplicities. State the capacity and uniqueness constraints. Explain assumptions and any technical lifelines.
+
+US-01: Browse Course Catalog
+As a student, I want to browse the electronic course catalog for a semester so that I can see the available subjects and how many places are left.
+
+AC-01 [R1]: Given the student is viewing the catalog for a specific semester, When the page loads, Then the system shows the course code, title, offering, and available places.
+
+AC-02 [Scenario, R5]: Given a student is viewing the catalog, When they see available places for an offering, Then the system does not reserve a place or change the enrollment count until a registration request is explicitly made.
+
+US-02: Register for a Course Offering
+As a student, I want to register for a specific course offering so that I can secure an available place in the class.
+
+AC-03 [R2, R4]: Given the student is not currently enrolled in the selected offering and its current availability is greater than zero, When the student requests registration, Then the system creates exactly one Enrollment linking the student and offering, updates the available places, and returns a confirmation.
+
+AC-04 [Scenario, R2]: Given a course offering has exactly one place remaining, When the student requests registration, Then the system executes the final availability check and enrollment creation as one atomic operation to ensure the capacity is never exceeded.
+
+US-03: Registration Validation and Rejection
+As a student, I want to receive clear feedback if my registration fails so that I know why I was not enrolled.
+
+AC-05 [R2, R5]: Given the current availability of the selected course offering is zero, When the student requests registration, Then the system explains "course full", creates no enrollment, and leaves the enrollment count unchanged.
+
+AC-06 [R3, R5]: Given the student already has an existing enrollment in the selected course offering, When the student requests registration for that same offering, Then the system explains "already enrolled", creates no enrollment, and leaves the enrollment count unchanged.
+
 
 **Response:**
 
