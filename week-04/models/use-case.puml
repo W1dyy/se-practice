@@ -1,0 +1,25 @@
+@startuml
+left to right direction
+actor "Student" as student
+actor "Administrator" as admin
+
+rectangle "Smart Campus System" {
+  usecase "View room availability" as UC1
+  usecase "Book a room" as UC2
+  usecase "Cancel a booking" as UC3
+  usecase "Block a room" as UC4
+  usecase "Unblock a room" as UC5
+  usecase "Review usage" as UC6
+  usecase "Produce confirmation" as UC7
+  
+  'why: R4 - A successful booking produces a confirmation
+  UC2 ..> UC7 : <<include>>
+}
+
+student -- UC1
+student -- UC2
+student -- UC3
+admin -- UC4
+admin -- UC5
+admin -- UC6
+@enduml
