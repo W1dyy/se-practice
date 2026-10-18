@@ -1,0 +1,38 @@
+@startuml
+actor Student
+participant "CatalogUI" as UI
+participant "RegistrationSystem" as System
+participant "CourseOffering" as Offering
+participant "Enrollment" as Enrollment
+
+Student -> UI: browseCatalog(semester)
+UI -> System: getOfferings(semester)
+System --> UI: return offerings with available places
+UI --> Student: show course code, title, offering, and places
+
+note right of System
+  AC-02: Catalog view does not reserve a place
+  or change enrollment counts.
+end note
+
+Student -> UI: register(offeringId)
+UI -> System: requestRegistration(studentId, offeringId)
+
+group Atomic final checks and creation
+    System -> System: checkDuplicate(studentId, offeringId)
+    System -> Offering: checkCapacity()
+    
+    alt already enrolled
+        System --> UI: explain "already enrolled"
+        UI --> Student: show rejection "already enrolled"
+    else course full
+        System --> UI: explain "course full"
+        UI --> Student: show rejection "course full"
+    else not enrolled and places left
+        System -> Enrollment **: createEnrollment(studentId, offeringId)
+        System -> Offering: updateAvailability()
+        System --> UI: return confirmation
+        UI --> Student: show success confirmation
+    end
+end
+@enduml
