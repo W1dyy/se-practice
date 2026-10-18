@@ -12,7 +12,7 @@ class Course {
 class CourseOffering {
     + semester: String
     + capacity: Integer
-    + availablePlaces: Integer
+    + /availablePlaces: Integer
 }
 
 class Enrollment {

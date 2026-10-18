@@ -20,7 +20,7 @@ UI -> System: requestRegistration(studentId, offeringId)
 
 group Atomic final checks and creation
     System -> System: checkDuplicate(studentId, offeringId)
-    System -> Offering: checkCapacity(offeringId)
+    System -> Offering: checkCapacity()
     
     alt already enrolled
         System --> UI: explain "already enrolled"
