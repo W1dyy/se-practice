@@ -1,0 +1,29 @@
+student:
+  name: "Amir Bakhytzhan"
+  id: "24B031694"
+  github_username: "your-github-username"
+  repository: "your-repo-name"
+  branch: "week-03"
+
+ai_tool:
+  assistant: "Google Gemini"
+  exact_model_name: "gemini-2.5-flash"
+
+decisions:
+  r2_duration_boundary: "Exactly two hours is permitted (<= 2 hours)."
+  r3_overlap_boundary: "A booking ending at time T and another starting at time T do not overlap."
+
+checker_results:
+  check_requirements_exit_code: 0
+  validate_submission_exit_code: 0
+  total_checks_passed: 23
+
+traceability_gaps:
+  - "UC-01 (View availability) has no dedicated acceptance criteria written because AC generation was restricted to 3 selected stories."
+  - "UC-05 (Review usage) lacks detailed AC criteria due to 3-story limit constraint."
+  - "UC-06 (Send confirmation) lacks explicit AC criteria; execution is triggered implicitly via UC-02 and UC-03."
+
+review_findings:
+  - "US-04 / UC-06: Initial AI generation incorrectly attached human actor associations directly to Send confirmation (UC-06); corrected in diagram to be automated <<include>> dependencies from UC-02 and UC-03."
+  - "US-07 / AC-03: AI prompt output initially did not clearly define whether 2 hours was inclusive or exclusive for Business Rule R2; clarified assumption in AC-03 to explicitly allow exactly 2 hours."
+  - "US-02 / AC-04: AI generated an unconstrained overlap case; updated AC-04 to explicitly validate adjacent booking start/end times per Business Rule R3 boundary decision."

@@ -1,0 +1,29 @@
+@startuml
+class Student {
+  + studentId: String
+}
+
+class Room {
+  + roomId: String
+  + isBlocked: Boolean
+}
+
+class Booking {
+  + bookingId: String
+  + startTime: DateTime
+  + duration: Integer
+}
+
+class Administrator {
+  + adminId: String
+}
+
+Student "1" -- "0..*" Booking : makes >
+Room "1" -- "0..*" Booking : hosts >
+Administrator "1" -- "0..*" Room : manages >
+
+note right of Booking
+  R1: Future start, duration > 0 and <= 2 hours.
+  R2: Active bookings for the same room cannot overlap.
+end note
+@enduml

@@ -1,0 +1,2 @@
+# AI Usage
+AI tools (ChatGPT) were used under Level D policy to generate initial PlantUML drafts based on the provided scenario and R1-R4 rules. All outputs were verified, corrected for PlantUML conventions, and checked for domain accuracy before final submission.
