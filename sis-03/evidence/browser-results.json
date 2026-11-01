@@ -1,0 +1,189 @@
+{
+  "v1": {
+    "T1": {
+      "actual": "Available",
+      "expected": "Available",
+      "pass": true,
+      "bookingsUnchanged": true,
+      "errors": []
+    },
+    "T2": {
+      "actual": "Unavailable",
+      "expected": "Unavailable",
+      "pass": true,
+      "bookingsUnchanged": true,
+      "errors": []
+    },
+    "T3": {
+      "actual": "Unavailable",
+      "expected": "Unavailable",
+      "pass": true,
+      "bookingsUnchanged": true,
+      "errors": []
+    },
+    "T4": {
+      "actual": "Available",
+      "expected": "Available",
+      "pass": true,
+      "bookingsUnchanged": true,
+      "errors": []
+    },
+    "T5": {
+      "actual": "Unavailable",
+      "expected": "Unavailable",
+      "pass": true,
+      "bookingsUnchanged": true,
+      "errors": []
+    },
+    "T6": {
+      "actual": "Unavailable",
+      "expected": "Unavailable",
+      "pass": true,
+      "bookingsUnchanged": true,
+      "errors": []
+    },
+    "T7": {
+      "actual": "Unavailable",
+      "expected": "Unavailable",
+      "pass": true,
+      "bookingsUnchanged": true,
+      "errors": []
+    },
+    "T8": {
+      "actual": "Not testable",
+      "reason": "locator.fill: Error: Malformed value"
+    },
+    "T9": {
+      "actual": "Not testable",
+      "reason": "locator.fill: Error: Malformed value"
+    },
+    "T10": {
+      "actual": "Unavailable",
+      "expected": "Unavailable",
+      "pass": true,
+      "bookingsUnchanged": true,
+      "errors": []
+    },
+    "T11": {
+      "actual": "Available",
+      "expected": "Available",
+      "pass": true,
+      "bookingsUnchanged": true,
+      "errors": []
+    },
+    "T12": {
+      "actual": "Available",
+      "expected": "Available",
+      "pass": true,
+      "bookingsUnchanged": true,
+      "errors": [],
+      "layout": {
+        "width": 375,
+        "scrollWidth": 375
+      }
+    }
+  },
+  "final": {
+    "T1": {
+      "actual": "Available",
+      "expected": "Available",
+      "pass": true,
+      "bookingsUnchanged": true,
+      "errors": []
+    },
+    "T2": {
+      "actual": "Unavailable",
+      "expected": "Unavailable",
+      "pass": true,
+      "bookingsUnchanged": true,
+      "errors": []
+    },
+    "T3": {
+      "actual": "Unavailable",
+      "expected": "Unavailable",
+      "pass": true,
+      "bookingsUnchanged": true,
+      "errors": []
+    },
+    "T4": {
+      "actual": "Available",
+      "expected": "Available",
+      "pass": true,
+      "bookingsUnchanged": true,
+      "errors": []
+    },
+    "T5": {
+      "actual": "Unavailable",
+      "expected": "Unavailable",
+      "pass": true,
+      "bookingsUnchanged": true,
+      "errors": []
+    },
+    "T6": {
+      "actual": "Unavailable",
+      "expected": "Unavailable",
+      "pass": true,
+      "bookingsUnchanged": true,
+      "errors": []
+    },
+    "T7": {
+      "actual": "Unavailable",
+      "expected": "Unavailable",
+      "pass": true,
+      "bookingsUnchanged": true,
+      "errors": []
+    },
+    "T8": {
+      "actual": "Available",
+      "expected": "Available",
+      "pass": true,
+      "bookingsUnchanged": true,
+      "errors": []
+    },
+    "T9": {
+      "actual": "Unavailable",
+      "expected": "Unavailable",
+      "pass": true,
+      "bookingsUnchanged": true,
+      "errors": []
+    },
+    "T10": {
+      "actual": "Unavailable",
+      "expected": "Unavailable",
+      "pass": true,
+      "bookingsUnchanged": true,
+      "errors": []
+    },
+    "T11": {
+      "actual": "Available",
+      "expected": "Available",
+      "pass": true,
+      "bookingsUnchanged": true,
+      "errors": []
+    },
+    "T12": {
+      "actual": "Available",
+      "expected": "Available",
+      "pass": true,
+      "bookingsUnchanged": true,
+      "errors": [],
+      "layout": {
+        "width": 375,
+        "scrollWidth": 375
+      }
+    }
+  },
+  "issues": {
+    "v1": {
+      "associatedLabels": 0,
+      "resultAfterEditing": "Available",
+      "resultAfterRecheck": "Unavailable"
+    },
+    "final": {
+      "associatedLabels": 4,
+      "resultAfterEditing": null,
+      "resultAfterRecheck": "Unavailable"
+    }
+  },
+  "method": "v1 campus data supplied by browser route interception, source files unchanged; final uses shipped demo fixtures"
+}
