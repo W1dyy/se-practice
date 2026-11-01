@@ -18,7 +18,7 @@
 
 **Anything accepted from the AI without fully understanding it:** student review pending; no personal assurance is invented.
 
-**Authorship deviation:** At the student's explicit request, Codex drafted section 2 after AI use had begun. This fails the independently written pre-AI baseline requirement. Section 10 remains pending student authorship. Critique decisions are provisional agent decisions, and section 11 is an incomplete stage record rather than four complete transcripts. The final page was repaired locally, not regenerated in Bolt. GitHub push and PR creation have not succeeded.
+**Authorship deviation:** At the student's explicit request, Codex drafted section 2 after AI use had begun. This fails the independently written pre-AI baseline requirement. Section 10 remains pending student authorship. Critique decisions are provisional agent decisions, and section 11 is an incomplete stage record rather than four complete transcripts. The final page was repaired locally, not regenerated in Bolt. Publication through the connected GitHub account succeeded; PR https://github.com/W1dyy/se-practice/pull/6 is open. The original local commits were recreated with identical trees and their original order; the server timestamps are actual publication times.
 
 Student signature: pending
 Preparation date: 2026-11-01

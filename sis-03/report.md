@@ -2,7 +2,7 @@
 
 Student: Bakhytzhan Amir; ID: 24B031694; group: MON 16:00-19:00; GitHub: W1dyy.
 
-Status: local implementation and observed tests completed; submission remains incomplete. AI authorship, missing independent reflection, incomplete exchange transcripts and GitHub publication limitations are disclosed below. Automated PASS results do not establish compliance with those requirements.
+Status: published on branch sis-03 with open PR https://github.com/W1dyy/se-practice/pull/6; implementation and observed tests completed; submission content remains incomplete. AI authorship, missing independent reflection, incomplete exchange transcripts and provenance limitations are disclosed below. Automated PASS results do not establish compliance with those requirements.
 
 ## 1. Setup and reuse
 
@@ -372,9 +372,9 @@ Not applicable: Path A uses the supplied checker's mutation analysis instead.
 | Student verification | Critique decisions and the final work were inspected by Codex; no independent student verification is claimed. | Student reviews code, cases, changes and all claims before submitting. |
 | Final Bolt provenance | Final source is a local repair of the unchanged Week 06 Bolt export, not a fresh Bolt download. | Import the repaired project into Bolt, verify there, and retain a genuine final export if the course requires it. |
 | v1 browser fixture method | Required case data was injected into the served module only in the v1 test browser; native v1 has different fixed sample data. | Grader can rerun the documented harness; student can perform a separate native-fixture check. |
-| GitHub publication | Local branch and commits exist; push failed during GitHub credential lookup. No open PR has been created. | Authenticate GitHub, push sis-03, create sis-03 to main PR and leave it open. |
+| GitHub publication | Published through the connected GitHub account after the initial terminal authentication failure. Open PR: https://github.com/W1dyy/se-practice/pull/6, sis-03 to main. Original local commits were recreated through GitHub with identical file trees, preserving their order; publication timestamps are real. | Keep the PR open for grading; complete the remaining disclosed content before submission. |
 
-The required PR title is `SIS 03 - Room availability - Bakhytzhan Amir`. Its five-section draft follows. Time spent is deliberately not invented.
+The open PR title is `SIS 03 - Room availability - Bakhytzhan Amir`. Its five-section draft follows. Time spent is deliberately not invented.
 
 ### PR description draft
 
