@@ -13,7 +13,7 @@ Checks SHAPE, never QUALITY.
   PASS   D10  reuse matches report.md section 1
   PASS   D11  pass + fail + error = 55
   PASS   D12  declared 53/2/0, a run now gives 53/2/0
-  PASS   D13  checker.commit: 0b02941
+  PASS   D13  checker.commit: 05b67f8
   PASS   D14  counts: all match
   PASS   D15  cases: match section 5
   PASS   D16  known_fails matches the checker: ['Q1', 'X2']
