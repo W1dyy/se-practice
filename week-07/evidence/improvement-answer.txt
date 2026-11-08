@@ -1,0 +1,4 @@
+The first run reports 17 passed and no failures; there is no failed expectation to repair and no implementation fix is justified.
+Accept T01-T14, X1 and X2: their exact expected booleans match the plan and they import the real module with fresh fixtures. The AC5 comparison is valid but uses a touching request, so an overlap regression could stop it before a mutation is reached.
+Add PAST for 539-570 with now 540: AC1 rejects a start strictly before now, detecting an equality-only time check. Add REPEAT for 720-780 twice on the same non-touching fixture: AC5 requires unchanged data and repeatable results, detecting an availability check that reserves a slot. Add REJECTED for an overlapping request with a deep-copy comparison: AC5 also applies when the answer is false.
+These are coverage improvements, not test repairs. Keep all original expectations. AC6 remains a browser task, and malformed existing bookings remain unspecified by the criteria.

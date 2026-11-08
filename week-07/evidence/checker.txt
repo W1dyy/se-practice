@@ -1,0 +1,39 @@
+Week 07 - testing AI-generated code: the project, the suite, the runs, the report
+
+PASS   A1   project exported to app/                                           app: 6 source files
+PASS   A2   booking module exports canBook                                     app/src/booking.ts exports canBook
+PASS   A3   the page imports and calls canBook                                 called from app/src/App.tsx
+PASS   A4   exports are clean: no node_modules, no .env, under 5 MB            clean
+PASS   A5   Vitest is in package.json                                          vitest 3.2.4
+PASS   S1   final suite beside the module imports vitest and the real canBook  app/src/booking.test.ts imports vitest and ./booking
+PASS   S2   nothing mocked, skipped, focused or table-driven                   real function, every test runs
+PASS   S3   17 tests or more in the final suite                                20 tests
+PASS   S4   T01-T14 each named in a test                                       T01-T14 present
+PASS   S5   T01-T14 assert the exact expected decision                         exact decisions, as planned
+PASS   S6   T01-T14 use the plan's inputs                                      inputs as planned
+PASS   S7   AC5: bookings compared before and after an Available call          AC5 test compares the bookings after an Available call
+PASS   S8   your own cases X1 and X2 named in tests                            X1 and X2 present
+PASS   S9   fixed time: no Date or Math.random in the suite                    fixed time
+PASS   S10  first suite kept in suites/first/, final differs from it           suites/first/booking.test.ts kept; final differs
+PASS   R1   report 6.1: the first run, pasted                                  first run: 0 failed, 17 passed (17)
+PASS   R2   report 6.3: the final run, all passing, same suite                 20 passed (20)
+PASS   R3   Vitest version recorded                                            Vitest 3.2.4
+PASS   M1   M1 (>= 120) tried and explained                                    detected by T06
+PASS   M2   M2 (touching as overlap) tried and explained                       detected by AC5, T01, T08
+PASS   M3   M3 (no blocked rejection) tried and explained                      detected by T13
+PASS   M4   report 7: the three mutant runs, pasted                            3 mutant runs pasted
+PASS   U1   five UI screenshots: evidence/ui-1 ... ui-5                        ui-1 ... ui-5
+PASS   U2   ui-4 taken at phone width (portrait)                               375x812
+PASS   U3   report 8: five UI checks observed and judged                       5 of 5 passed
+PASS   L1   report 1: project, assistant, model, where, command                setup recorded
+PASS   L2   report 2: the function before, and the extraction in 40+ words     before-table complete; extraction in 85 words
+PASS   L3   report 3: a reason for every case, X1 and X2 complete              every case has a reason; X1 and X2 complete
+PASS   L4   report 4: generation prompt as sent, and the answer                prompt as sent; answer pasted
+PASS   L5   report 5: two review decisions or more                             4 review decisions
+PASS   L6   report 6: failures diagnosed, improvement prompt as sent           failures diagnosed; improvement prompt as sent
+PASS   L7   report 9.2: first and improved suites compared                     comparison complete
+PASS   L8   report 10: conclusion of 120-180 words                             155 words
+------------------------------------------------------------------------------
+Final suite: app/src/booking.test.ts, 20 tests. First suite: 17 tests.
+SUMMARY pass=33 fail=0 error=0   (33 checks)
+Files and shape are clean. This says nothing about whether your tests are good - the mutants and the review do.
