@@ -1,31 +1,19 @@
 # AI Usage Disclosure — Week 08
 
-Required by the course academic policy (Generative AI use level **D — AI-integrated**).
-You are responsible for the accuracy, testing and integrity of everything you submit,
-including anything an AI tool produced.
-
 | Tool | Exact model / plan | Used for | Which files it touched |
 | --- | --- | --- | --- |
-| | | diagnosis without the skill (Task 4) | none — "Do not edit code" |
-| | | diagnosis with bug-detector (Task 5) | none — "Do not edit code" |
-| | | | |
+| Codex independent agent plain_diagnosis | not displayed, inherited parent model | Diagnosis without the skill, fresh context | none; read only evidence/plain-prompt.txt |
+| Codex independent agent skill_diagnosis | not displayed, same inherited parent model | Diagnosis with bug-detector, fresh context, prompt-only simulation | none; read only SKILL.md and evidence/skill-prompt.txt |
+| Codex parent session | not displayed | All implementation, tests, hypotheses, comparison, report, packaging, commits and terminal execution | app/src/booking.ts, app/src/booking.test.ts, skills/, evidence/, lab-report.md, submission.yml, AI_USAGE.md |
 
-**`skills/bug-detector/SKILL.md` was typed by me from the deck's text, not generated:** yes / no
+SKILL.md was typed by me from the deck text, not generated: no. Codex copied the exact provided text into the file and packaged it; the student's required manual typing remains pending.
+I applied the patches myself after reviewing the proposals: no. Codex reviewed and applied them. One overlap line changed for BUG-A; one push line deleted for BUG-B. Student review is pending.
+I used another assistant as well: yes. Two independent Codex subagents were explicitly authorized for the controlled comparison; no model override was used. The parent drafted all report sections, including the labelled conclusion draft.
+Every terminal output in the report was pasted from a real run, unedited: yes. The diagnosis answers are also preserved unedited. They are not claims of executed tests; both agents explicitly state that they did not execute code.
+I can explain both bugs and fixes without the assistant: not yet confirmed by the student.
+Anything accepted without fully understanding it: the student has not yet personally verified the generated work; no understanding or signature is asserted on the student's behalf.
 
-**I applied the patches myself, one minimal change per bug, after reviewing what the assistant
-proposed:** yes / no
-<!-- If an assistant edited app/ directly, say which change and how you reviewed it. -->
+Simulation disclosure: fresh agent contexts, same saved code/AC/failure input, no installed skill. Text transcripts exist; a genuine installation/simulation screenshot does not, so E1 remains ERROR. The shared AC1 wording was abbreviated in the supplied Week 08 contract; both agents' extra time-boundary suggestions were rejected against Week 07 AC1/T02. The plain response's table-driven test suggestion was not copied into the suite.
 
-**I used another assistant as well (to explain a failure, to draft text in lab-report.md, …):** yes / no
-<!-- If "yes": which one, the exact model, and for which section. -->
-
-**Every terminal output in lab-report.md was pasted from a real run, unedited:** yes / no
-
-**I can explain both bugs and both fixes — which line, why it was wrong, which test proves the
-fix — without the assistant:** yes / no
-
-**Anything I accepted from the AI without fully understanding it:**
-<!-- Name the file and the part. An honest entry here costs far less than a blank one that turns out to be untrue. -->
-
-Signed: <your name>
-Date:
+Student signature: pending personal review; not signed by the assistant.
+Prepared on: 2026-11-08.
