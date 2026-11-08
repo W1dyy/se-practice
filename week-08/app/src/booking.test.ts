@@ -94,3 +94,15 @@ test('REJECTED AC5: an overlapping request preserves data', () => {
   expect(canBook({ ...rest, start: 630, end: 690, bookings })).toBe(false);
   expect(bookings).toEqual(before);
 });
+
+test('BUG-A AC4: a free gap may touch bookings on both sides', () => {
+  const bookings = [{ start: 600, end: 660 }, { start: 720, end: 780 }];
+  expect(canBook({ start: 660, end: 720, now: 540, blocked: false, bookings })).toBe(true);
+});
+
+test('BUG-B AC5: a non-touching Available request must not mutate bookings', () => {
+  const bookings = [{ start: 600, end: 660 }];
+  const before = structuredClone(bookings);
+  expect(canBook({ start: 720, end: 780, now: 540, blocked: false, bookings })).toBe(true);
+  expect(bookings).toEqual(before);
+});
