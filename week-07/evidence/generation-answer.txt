@@ -1,0 +1,5 @@
+Run command: npx vitest run
+AC mapping: AC1 = T02-T05, X1, X2; AC2 = T06-T07; AC3 = T13; AC4 = T01, T08-T12, T14; AC5 = AC5.
+AC6 requires browser checks; these unit tests cannot establish mobile usability or validation feedback.
+Unclear requirement: acceptance criteria do not define how malformed existing bookings should be handled. The suite makes no normative assertion about those records.
+Each test imports the real module, fixes time and creates a new fixture. Expected values come from the supplied case plan.
