@@ -1,0 +1,53 @@
+Find the root cause of the failed room-booking test. Propose minimal patch and regression test. Do not edit code.
+
+Scenario: Smart Campus room availability. Continue the Smart Campus project from Practice #06 and the tests from Practice #07.
+User story: As a student, I want to check a room's availability so that I can choose a valid booking time.
+Use one room, fictional bookings, fixed time, and a Boolean availability decision. No login or database.
+
+AC1 Reject start ≥ end and requests in the past.
+AC2 Enforce the maximum allowed duration (120 minutes).
+AC3 Reject a blocked room.
+AC4 Reject overlaps; allow bookings that only touch at endpoints.
+AC5 Return Available / Unavailable without changing booking data.
+AC6 Preserve clear UI feedback on desktop and mobile.
+
+Default fixture for the supplied failure: now = 540, blocked = false, bookings = [{ start: 600, end: 660 }]. T01 request: 660-720.
+
+Observed failure (unedited excerpt from buggy-run.txt):
+ FAIL  src/booking.test.ts > T01 AC4: The existing interval ends at 660, so no occupied minute is shared.
+AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ❯ src/booking.test.ts:7:59
+      5| 
+      6| test('T01 AC4: The existing interval ends at 660, so no occupied minut…
+      7|   expect(canBook({ ...fixture(), start: 660, end: 720 })).toBe(true);
+       |                                                           ^
+      8| });
+      9| 
+
+
+Provided code:
+export function canBook({ start, end, now, blocked, bookings }: {
+  start: number;
+  end: number;
+  now: number;
+  blocked: boolean;
+  bookings: { start: number; end: number }[];
+}): boolean {
+  if (!(0 <= start && start < end && end <= 1440)) return false;
+  if (!(start > now)) return false;
+  if (end - start > 120) return false;
+  if (blocked) return false;
+  for (const b of bookings) {
+    if (start <= b.end && end >= b.start) return false;
+  }
+  // keep the room's list current with the slot that was just found free
+  bookings.push({ start, end });
+  return true;
+}
