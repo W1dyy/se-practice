@@ -73,3 +73,24 @@ test('AC5: an Available decision leaves booking data unchanged', () => {
   expect(canBook({ ...rest, start: 660, end: 720, bookings })).toBe(true);
   expect(bookings).toEqual(before);
 });
+
+test('PAST AC1: start before now is rejected', () => {
+  expect(canBook({ ...fixture(), start: 539, end: 570 })).toBe(false);
+});
+
+test('REPEAT AC5: non-touching checks are pure and repeatable', () => {
+  const { bookings, ...rest } = fixture();
+  const before = structuredClone(bookings);
+  const request = { ...rest, start: 720, end: 780, bookings };
+  expect(canBook(request)).toBe(true);
+  expect(bookings).toEqual(before);
+  expect(canBook(request)).toBe(true);
+  expect(bookings).toEqual(before);
+});
+
+test('REJECTED AC5: an overlapping request preserves data', () => {
+  const { bookings, ...rest } = fixture();
+  const before = structuredClone(bookings);
+  expect(canBook({ ...rest, start: 630, end: 690, bookings })).toBe(false);
+  expect(bookings).toEqual(before);
+});
