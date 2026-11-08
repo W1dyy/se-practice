@@ -1,0 +1,5 @@
+Codex review of both independent responses before editing:
+Accept strict overlap predicate for BUG-A and removal of bookings.push for BUG-B; real regression failures independently establish both.
+Reject both proposed start==now relaxations. The shortened Week 08 AC1 given to BOTH agents says "requests in the past", but Week 07's authoritative AC1 and T02 explicitly require start > now. This is a shared-input limitation and a reason to consult the full contract, not change a correct test.
+Reject copying the plain response's aggregate patch wholesale: it changes an unrelated guard and removes the comment as well as the push. The assignment requires one changed line per bug. The plain response's test.each syntax is not permitted for the submitted suite; the new BUG-A and BUG-B tests are individual test calls.
+The skill response is more careful about inspection versus execution and qualifies the time-boundary suggestion, but it does not eliminate the specification ambiguity. Both find both target bugs. No claim that either agent actually executed a test is made.
