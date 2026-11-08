@@ -1,0 +1,31 @@
+
+ RUN  v3.2.4 C:/Users/s8776/Documents/Codex/2026-11-01/instructions-sis-03-ai-assisted-coding/work/se-practice/week-08/app
+
+ ↓ src/booking.test.ts > T01 AC4: The existing interval ends at 660, so no occupied minute is shared.
+ ↓ src/booking.test.ts > T02 AC1: Start equals the supplied current time; it must be strictly later.
+ ↓ src/booking.test.ts > T03 AC1: Equal endpoints give an empty interval.
+ ↓ src/booking.test.ts > T04 AC1: The end precedes the start.
+ ↓ src/booking.test.ts > T05 AC1: The end exceeds the inclusive 1440 day boundary.
+ ↓ src/booking.test.ts > T06 AC2: The duration is exactly 120 minutes, which is permitted.
+ ↓ src/booking.test.ts > T07 AC2: The duration is 121 minutes, exceeding the cap by one.
+ ↓ src/booking.test.ts > T08 AC4: The request ends where the existing booking starts, sharing no occupied time.
+ ↓ src/booking.test.ts > T09 AC4: Both occupy minutes from 630 to 660.
+ ↓ src/booking.test.ts > T10 AC4: The request contains the entire existing booking.
+ ↓ src/booking.test.ts > T11 AC4: The request lies inside the occupied interval.
+ ↓ src/booking.test.ts > T12 AC4: Identical intervals share their entire duration.
+ ↓ src/booking.test.ts > T13 AC3: The blocked flag overrides an otherwise valid touching request.
+ ↓ src/booking.test.ts > T14 AC4: With no existing bookings there can be no overlap.
+ ↓ src/booking.test.ts > X1 AC1: The end is exactly the inclusive day limit and duration is 60.
+ ↓ src/booking.test.ts > X2 AC1: A negative start is outside the day even when now is earlier.
+ ↓ src/booking.test.ts > AC5: an Available decision leaves booking data unchanged
+ ↓ src/booking.test.ts > PAST AC1: start before now is rejected
+ ↓ src/booking.test.ts > REPEAT AC5: non-touching checks are pure and repeatable
+ ↓ src/booking.test.ts > REJECTED AC5: an overlapping request preserves data
+ ✓ src/booking.test.ts > BUG-A AC4: a free gap may touch bookings on both sides 2ms
+ ↓ src/booking.test.ts > BUG-B AC5: a non-touching Available request must not mutate bookings
+
+ Test Files  1 passed (1)
+      Tests  1 passed | 21 skipped (22)
+   Start at  22:32:31
+   Duration  1.28s (transform 78ms, setup 0ms, collect 88ms, tests 4ms, environment 0ms, prepare 484ms)
+

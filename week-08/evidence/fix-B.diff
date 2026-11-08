@@ -1,0 +1,11 @@
+diff --git a/week-08/app/src/booking.ts b/week-08/app/src/booking.ts
+index 738d90f..d034fd1 100644
+--- a/week-08/app/src/booking.ts
++++ b/week-08/app/src/booking.ts
+@@ -13,6 +13,5 @@ export function canBook({ start, end, now, blocked, bookings }: {
+     if (start < b.end && end > b.start) return false;
+   }
+   // keep the room's list current with the slot that was just found free
+-  bookings.push({ start, end });
+   return true;
+ }

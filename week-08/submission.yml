@@ -1,0 +1,40 @@
+schema: 1
+week: "08"
+student:
+  name: "Bakhytzhan Amir"
+  student_id: "24B031694"
+  github: "W1dyy"
+assistant:
+  tool: "Codex desktop, two independent subagents"
+  model: "not displayed"
+skill:
+  environment: "prompt-only"
+  invoked: "yes"
+project:
+  language: "ts"
+  vitest: "3.2.4"
+counts:
+  tests_final: 22
+  buggy_failed: 4
+  defects_logged: 2
+  lines_changed: 2
+checker:
+  pass: 29
+  fail: 1
+  error: 1
+  commit: "42065d3"
+  known_fails: [E1, L4]
+verdict:
+  skill_helped: "yes"
+review_findings:
+  - "BUG-A: inclusive endpoint comparisons made T01, T08 and the double-touch regression reject valid intervals."
+  - "BUG-B: bookings.push mutated a non-touching Available request; REPEAT and BUG-B expose it independently."
+  - "T02: reject both agents' start==now suggestions against the full Week 07 AC1 contract."
+  - "Skill step 4 improved separation of observed failure, inspection evidence and an ambiguous AC1 interpretation."
+  - "AC5: after BUG-A was fixed, the failure moved from the Boolean assertion to the data comparison."
+honesty:
+  buggy_function_pasted_unchanged: "yes"
+  same_input_both_chats: "yes"
+  outputs_unedited: "yes"
+  ai_usage_disclosed: "yes"
+
