@@ -1,30 +1,18 @@
 # AI Usage Disclosure — Week 07
 
-Required by the course academic policy (Generative AI use level **D — AI-integrated**).
-You are responsible for the accuracy, testing and integrity of everything you submit,
-including anything an AI tool produced.
-
 | Tool | Exact model / plan | Used for | Which files it touched |
 | --- | --- | --- | --- |
-| | | the first test suite (Task 3) | |
-| | | the improvement prompt (Task 5) | |
-| | | | |
+| Codex desktop | not displayed | Extraction, plan, first-suite generation, review and improvements, mutations, real terminal execution, browser automation and report drafting | app/src/booking.ts, app/src/booking.test.ts, app/src/App.tsx, app/package.json and lockfile, suites/first/booking.test.ts, evidence/, lab-report.md, submission.yml, AI_USAGE.md |
 
-**I used an assistant to extract `canBook` (Task 1), or to fix a defect in it:** yes / no
-<!-- If "yes": which change, in which file, and how you checked that the behaviour did not change. -->
+The assignment prompts were used within the current Codex chat; there was no separate fresh Week 07 generation chat. Saved generation and improvement input/answer files document that process. The plan and review are AI-authored, not independent student work.
 
-**I used another assistant as well (to explain a failure, to draft text in lab-report.md, …):** yes / no
-<!-- If "yes": which one, the exact model, and for which section. -->
+I used an assistant to extract canBook: yes. It retained the starter's Boolean conditions; 20 unit tests, three restored mutants and browser checks were executed. No production defect was found requiring a behavior fix.
+I used another assistant as well: no for Week 07. The same Codex session drafted the entire report, including the explicitly labelled conclusion draft.
+The first suite is preserved exactly as generated: yes.
+Every test output in the report is from a real saved run, unedited: yes. Presentation wrappers are Markdown; test log content is preserved.
+I can explain every test without the assistant: not yet confirmed by the student.
+Anything accepted without fully understanding it: student review of all generated tests, reasons, report and changes is pending; this file does not claim understanding on the student's behalf.
+Browser checks were automated using Playwright and Chrome, not manually performed by the student.
 
-**`suites/first/` holds the assistant's first test file exactly as it generated it:** yes / no
-
-**Every terminal output in lab-report.md was pasted from a real run, unedited:** yes / no
-
-**I can explain every test in my final suite — its input, its expected result and the AC behind
-it — without the assistant:** yes / no
-
-**Anything I accepted from the AI without fully understanding it:**
-<!-- Name the file and the part. An honest entry here costs far less than a blank one that turns out to be untrue. -->
-
-Signed: <your name>
-Date:
+Student signature: pending personal review; not signed by the assistant.
+Prepared on: 2026-11-08.

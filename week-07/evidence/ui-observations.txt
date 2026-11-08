@@ -1,0 +1,6 @@
+Browser checks automated by Codex with Playwright/Chrome, not performed manually by the student.
+U1: 11:00-12:00 with now=09:00, room A-101, existing 10:00-11:00: Available.
+U2: blocked=true and resubmit: Unavailable replaced Available.
+U3: empty Start: clear required-input message, previous decision removed.
+U4: 375x812 CSS pixels: no horizontal overflow; form and Available result visible.
+U5: three repeated checks of 12:00-13:00: Available; existing booking list unchanged.
