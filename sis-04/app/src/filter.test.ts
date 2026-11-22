@@ -17,11 +17,11 @@ test('F1: only rooms with capacity >= 15 attendees remain', () => {
 });
 
 test('B5 F1: capacity exactly equal to attendees (10) includes the room', () => {
-  expect(ids(filterRooms(catalog(), { attendees: 10, equipment: [] }))).toContain('r-mid');
+  expect(ids(filterRooms(catalog(), { attendees: 10, equipment: [] }))).toEqual(['r-mid', 'r-lab', 'r-closed']);
 });
 
 test('B6 F1: capacity one below attendees (11 vs 10) excludes the room', () => {
-  expect(ids(filterRooms(catalog(), { attendees: 11, equipment: [] }))).not.toContain('r-mid');
+  expect(ids(filterRooms(catalog(), { attendees: 11, equipment: [] }))).toEqual(['r-lab', 'r-closed']);
 });
 
 test('F2: a room must have ALL selected items; projector + whiteboard leaves only rooms with both', () => {
@@ -32,6 +32,10 @@ test('F2: a room with only one of the two required items is excluded', () => {
   const result = ids(filterRooms(catalog(), { attendees: 1, equipment: ['projector', 'computers'] }));
   expect(result).not.toContain('r-mid');
   expect(result).toEqual(['r-lab', 'r-closed']);
+});
+
+test('F2: an item that no room has (video-call) leaves no room', () => {
+  expect(filterRooms(catalog(), { attendees: 1, equipment: ['video-call'] })).toEqual([]);
 });
 
 test('F4: a filter no room satisfies returns an empty list (the page shows the empty state)', () => {

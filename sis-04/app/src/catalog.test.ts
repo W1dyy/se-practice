@@ -13,7 +13,7 @@ const catalog = (): Room[] => [
 const NOW = 540; // 09:00
 
 test('F3 AC3: a blocked room with no bookings is never available', () => {
-  expect(checkRoom(catalog(), 'r-closed', { start: 600, end: 660, now: NOW })).toBe(false);
+  expect(checkRoom(catalog(), 'r-closed', { start: 900, end: 960, now: NOW })).toBe(false);
 });
 
 test('F5: the same times give different results for two rooms, from each room\'s own bookings', () => {
@@ -24,6 +24,10 @@ test('F5: the same times give different results for two rooms, from each room\'s
 
 test('B3 AC4: touching the chosen room\'s booking at its end is available', () => {
   expect(checkRoom(catalog(), 'r-lab', { start: 690, end: 750, now: NOW })).toBe(true);
+});
+
+test('B3 AC4: ending exactly where the chosen room booking starts is available', () => {
+  expect(checkRoom(catalog(), 'r-lab', { start: 570, end: 630, now: NOW })).toBe(true);
 });
 
 test('B4 AC4: overlapping the chosen room\'s booking by one minute is rejected', () => {
@@ -43,7 +47,7 @@ test('AC1: a request that starts before now is rejected through checkRoom', () =
 });
 
 test('an unknown room id is not available', () => {
-  expect(checkRoom(catalog(), 'no-such-room', { start: 600, end: 660, now: NOW })).toBe(false);
+  expect(checkRoom(catalog(), 'no-such-room', { start: 900, end: 960, now: NOW })).toBe(false);
 });
 
 test('AC5: checkRoom leaves the catalog and every room\'s bookings unchanged', () => {
