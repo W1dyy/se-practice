@@ -1,3 +1,5 @@
+import type { Room } from './rooms';
+
 export function canBook({ start, end, now, blocked, bookings }: {
   start: number;
   end: number;
@@ -14,4 +16,13 @@ export function canBook({ start, end, now, blocked, bookings }: {
   }
   // keep the room's list current with the slot that was just found free
   return true;
+}
+
+// The availability of one room from the catalog: canBook with THAT room's own blocked flag and
+// bookings (F3, F5). An unknown id is not available. Reads the catalog, never changes it (AC5).
+export function checkRoom(rooms: Room[], roomId: string,
+                          request: { start: number; end: number; now: number }): boolean {
+  const room = rooms.find(r => r.id === roomId);
+  if (!room) return false;
+  return canBook({ ...request, blocked: room.blocked, bookings: room.bookings });
 }

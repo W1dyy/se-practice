@@ -1,0 +1,139 @@
+
+ RUN  v3.2.4 .../se-practice/sis-04/app
+
+ ❯ src/catalog.test.ts (9 tests | 9 failed) 21ms
+   × F3 AC3: a blocked room with no bookings is never available 9ms
+     → checkRoom is not a function
+   × F5: the same times give different results for two rooms, from each room's own bookings 2ms
+     → checkRoom is not a function
+   × B3 AC4: touching the chosen room's booking at its end is available 1ms
+     → checkRoom is not a function
+   × B4 AC4: overlapping the chosen room's booking by one minute is rejected 1ms
+     → checkRoom is not a function
+   × AC2 B1: exactly 120 minutes in a free room is available through checkRoom 1ms
+     → checkRoom is not a function
+   × AC2 B2: 121 minutes in a free room is rejected through checkRoom 1ms
+     → checkRoom is not a function
+   × AC1: a request that starts before now is rejected through checkRoom 3ms
+     → checkRoom is not a function
+   × an unknown room id is not available 1ms
+     → checkRoom is not a function
+   × AC5: checkRoom leaves the catalog and every room's bookings unchanged 1ms
+     → checkRoom is not a function
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 9 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/catalog.test.ts > F3 AC3: a blocked room with no bookings is never available
+TypeError: checkRoom is not a function
+ ❯ src/catalog.test.ts:16:10
+     14| 
+     15| test('F3 AC3: a blocked room with no bookings is never available', () …
+     16|   expect(checkRoom(catalog(), 'r-closed', { start: 600, end: 660, now:…
+       |          ^
+     17| });
+     18| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/9]⎯
+
+ FAIL  src/catalog.test.ts > F5: the same times give different results for two rooms, from each room's own bookings
+TypeError: checkRoom is not a function
+ ❯ src/catalog.test.ts:21:10
+     19| test('F5: the same times give different results for two rooms, from ea…
+     20|   const rooms = catalog();
+     21|   expect(checkRoom(rooms, 'r-small', { start: 600, end: 660, now: NOW …
+       |          ^
+     22|   expect(checkRoom(rooms, 'r-mid', { start: 600, end: 660, now: NOW })…
+     23| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/9]⎯
+
+ FAIL  src/catalog.test.ts > B3 AC4: touching the chosen room's booking at its end is available
+TypeError: checkRoom is not a function
+ ❯ src/catalog.test.ts:26:10
+     24| 
+     25| test('B3 AC4: touching the chosen room\'s booking at its end is availa…
+     26|   expect(checkRoom(catalog(), 'r-lab', { start: 690, end: 750, now: NO…
+       |          ^
+     27| });
+     28| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/9]⎯
+
+ FAIL  src/catalog.test.ts > B4 AC4: overlapping the chosen room's booking by one minute is rejected
+TypeError: checkRoom is not a function
+ ❯ src/catalog.test.ts:30:10
+     28| 
+     29| test('B4 AC4: overlapping the chosen room\'s booking by one minute is …
+     30|   expect(checkRoom(catalog(), 'r-lab', { start: 689, end: 750, now: NO…
+       |          ^
+     31| });
+     32| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/9]⎯
+
+ FAIL  src/catalog.test.ts > AC2 B1: exactly 120 minutes in a free room is available through checkRoom
+TypeError: checkRoom is not a function
+ ❯ src/catalog.test.ts:34:10
+     32| 
+     33| test('AC2 B1: exactly 120 minutes in a free room is available through …
+     34|   expect(checkRoom(catalog(), 'r-mid', { start: 720, end: 840, now: NO…
+       |          ^
+     35| });
+     36| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/9]⎯
+
+ FAIL  src/catalog.test.ts > AC2 B2: 121 minutes in a free room is rejected through checkRoom
+TypeError: checkRoom is not a function
+ ❯ src/catalog.test.ts:38:10
+     36| 
+     37| test('AC2 B2: 121 minutes in a free room is rejected through checkRoom…
+     38|   expect(checkRoom(catalog(), 'r-mid', { start: 720, end: 841, now: NO…
+       |          ^
+     39| });
+     40| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/9]⎯
+
+ FAIL  src/catalog.test.ts > AC1: a request that starts before now is rejected through checkRoom
+TypeError: checkRoom is not a function
+ ❯ src/catalog.test.ts:42:10
+     40| 
+     41| test('AC1: a request that starts before now is rejected through checkR…
+     42|   expect(checkRoom(catalog(), 'r-mid', { start: 500, end: 560, now: NO…
+       |          ^
+     43| });
+     44| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/9]⎯
+
+ FAIL  src/catalog.test.ts > an unknown room id is not available
+TypeError: checkRoom is not a function
+ ❯ src/catalog.test.ts:46:10
+     44| 
+     45| test('an unknown room id is not available', () => {
+     46|   expect(checkRoom(catalog(), 'no-such-room', { start: 600, end: 660, …
+       |          ^
+     47| });
+     48| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/9]⎯
+
+ FAIL  src/catalog.test.ts > AC5: checkRoom leaves the catalog and every room's bookings unchanged
+TypeError: checkRoom is not a function
+ ❯ src/catalog.test.ts:52:3
+     50|   const rooms = catalog();
+     51|   const before = structuredClone(rooms);
+     52|   checkRoom(rooms, 'r-mid', { start: 700, end: 760, now: NOW });
+       |   ^
+     53|   checkRoom(rooms, 'r-small', { start: 600, end: 660, now: NOW });
+     54|   expect(rooms).toEqual(before);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/9]⎯
+
+
+ Test Files  1 failed | 1 passed (2)
+      Tests  9 failed | 22 passed (31)
+   Start at  18:19:42
+   Duration  1.22s (transform 123ms, setup 0ms, collect 177ms, tests 29ms, environment 0ms, prepare 978ms)
+
