@@ -1,5 +1,5 @@
 import { test, expect } from 'vitest';
-import { canBook } from './booking';
+import { canBook, checkRequest } from './booking';
 
 const fixture = () => ({ now: 540, blocked: false, bookings: [{ start: 600, end: 660 }] });
 
@@ -105,4 +105,24 @@ test('BUG-B AC5: a non-touching Available request must not mutate bookings', () 
   const before = structuredClone(bookings);
   expect(canBook({ start: 720, end: 780, now: 540, blocked: false, bookings })).toBe(true);
   expect(bookings).toEqual(before);
+});
+
+const room = () => ({ blocked: false, bookings: [{ start: 600, end: 660 }] });
+
+test('R3 AC1 AC6: a reversed interval shows only the error, with no Available/Unavailable verdict', () => {
+  expect(checkRequest({ now: '09:00', start: '12:00', end: '11:00', endOfDay: false }, room()))
+    .toEqual({ error: 'The end time must be after the start time.', result: null });
+});
+
+test('R3 AC6: a missing field asks for input and gives no verdict', () => {
+  expect(checkRequest({ now: '09:00', start: '', end: '11:00', endOfDay: false }, room()))
+    .toEqual({ error: 'Fill in the current time, the start and the end.', result: null });
+});
+
+test('R3 AC4 AC5: a valid touching request is Available, has no error and leaves bookings unchanged', () => {
+  const r = room();
+  const before = structuredClone(r.bookings);
+  expect(checkRequest({ now: '09:00', start: '11:00', end: '12:00', endOfDay: false }, r))
+    .toEqual({ error: '', result: true });
+  expect(r.bookings).toEqual(before);
 });
