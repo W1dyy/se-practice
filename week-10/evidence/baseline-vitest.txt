@@ -1,0 +1,10 @@
+
+ RUN  v3.2.4 .../se-practice/week-10/app
+
+ ✓ src/booking.test.ts (22 tests) 7ms
+
+ Test Files  1 passed (1)
+      Tests  22 passed (22)
+   Start at  18:12:50
+   Duration  1.22s (transform 59ms, setup 0ms, collect 64ms, tests 7ms, environment 0ms, prepare 576ms)
+

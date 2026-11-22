@@ -1,0 +1,77 @@
+
+ RUN  v3.2.4 .../se-practice/week-10/app
+
+ ❯ src/booking.test.ts (25 tests | 3 failed) 17ms
+   ✓ T01 AC4: The existing interval ends at 660, so no occupied minute is shared. 2ms
+   ✓ T02 AC1: Start equals the supplied current time; it must be strictly later. 0ms
+   ✓ T03 AC1: Equal endpoints give an empty interval. 0ms
+   ✓ T04 AC1: The end precedes the start. 0ms
+   ✓ T05 AC1: The end exceeds the inclusive 1440 day boundary. 0ms
+   ✓ T06 AC2: The duration is exactly 120 minutes, which is permitted. 0ms
+   ✓ T07 AC2: The duration is 121 minutes, exceeding the cap by one. 0ms
+   ✓ T08 AC4: The request ends where the existing booking starts, sharing no occupied time. 0ms
+   ✓ T09 AC4: Both occupy minutes from 630 to 660. 0ms
+   ✓ T10 AC4: The request contains the entire existing booking. 0ms
+   ✓ T11 AC4: The request lies inside the occupied interval. 0ms
+   ✓ T12 AC4: Identical intervals share their entire duration. 0ms
+   ✓ T13 AC3: The blocked flag overrides an otherwise valid touching request. 0ms
+   ✓ T14 AC4: With no existing bookings there can be no overlap. 0ms
+   ✓ X1 AC1: The end is exactly the inclusive day limit and duration is 60. 0ms
+   ✓ X2 AC1: A negative start is outside the day even when now is earlier. 0ms
+   ✓ AC5: an Available decision leaves booking data unchanged 1ms
+   ✓ PAST AC1: start before now is rejected 0ms
+   ✓ REPEAT AC5: non-touching checks are pure and repeatable 0ms
+   ✓ REJECTED AC5: an overlapping request preserves data 0ms
+   ✓ BUG-A AC4: a free gap may touch bookings on both sides 0ms
+   ✓ BUG-B AC5: a non-touching Available request must not mutate bookings 0ms
+   × R3 AC1 AC6: a reversed interval shows only the error, with no Available/Unavailable verdict 8ms
+     → checkRequest is not a function
+   × R3 AC6: a missing field asks for input and gives no verdict 1ms
+     → checkRequest is not a function
+   × R3 AC4 AC5: a valid touching request is Available, has no error and leaves bookings unchanged 1ms
+     → checkRequest is not a function
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 3 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/booking.test.ts > R3 AC1 AC6: a reversed interval shows only the error, with no Available/Unavailable verdict
+TypeError: checkRequest is not a function
+ ❯ src/booking.test.ts:113:10
+    111| 
+    112| test('R3 AC1 AC6: a reversed interval shows only the error, with no Av…
+    113|   expect(checkRequest({ now: '09:00', start: '12:00', end: '11:00', en…
+       |          ^
+    114|     .toEqual({ error: 'The end time must be after the start time.', re…
+    115| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/3]⎯
+
+ FAIL  src/booking.test.ts > R3 AC6: a missing field asks for input and gives no verdict
+TypeError: checkRequest is not a function
+ ❯ src/booking.test.ts:118:10
+    116| 
+    117| test('R3 AC6: a missing field asks for input and gives no verdict', ()…
+    118|   expect(checkRequest({ now: '09:00', start: '', end: '11:00', endOfDa…
+       |          ^
+    119|     .toEqual({ error: 'Fill in the current time, the start and the end…
+    120| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/3]⎯
+
+ FAIL  src/booking.test.ts > R3 AC4 AC5: a valid touching request is Available, has no error and leaves bookings unchanged
+TypeError: checkRequest is not a function
+ ❯ src/booking.test.ts:125:10
+    123|   const r = room();
+    124|   const before = structuredClone(r.bookings);
+    125|   expect(checkRequest({ now: '09:00', start: '11:00', end: '12:00', en…
+       |          ^
+    126|     .toEqual({ error: '', result: true });
+    127|   expect(r.bookings).toEqual(before);
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/3]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  3 failed | 22 passed (25)
+   Start at  18:16:06
+   Duration  1.46s (transform 85ms, setup 0ms, collect 76ms, tests 17ms, environment 1ms, prepare 511ms)
+
