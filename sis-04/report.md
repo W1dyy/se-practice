@@ -6,81 +6,112 @@
 
 ## 1. Setup and starting point
 
-<!-- Model: the exact model with its version, as the tool shows it ("ChatGPT" is a tool, not a
-     model). If the tool does not show it, write: not displayed
-     Starting point: week-08 | week-07 | sis-03 | starter   (README section 3)
-     Baseline commit: the commit that brings your starting point into sis-04/app/ UNCHANGED —
-     git rev-parse --short HEAD right after that commit. It is your "initial version". -->
+**Authorship note:** this SIS was carried out by the Claude Code agent (Anthropic, model `claude-opus-5-5`) at the student's request, with separate read-only Claude Code subagents used as "the assistant" for the analysis exchanges. The student's personal review is still pending; see `AI_USAGE.md`.
 
 | Item | Value |
 | --- | --- |
-| Assistant (tool) | (write here) |
-| Assistant model | (write here) |
-| Starting point | (write here) |
-| Baseline commit | (write here) |
-| Language (ts or js) | (write here) |
-| Vitest version | (write here) |
-| Where I ran the tests | (write here) |
+| Assistant (tool) | Claude Code (desktop app), read-only Plan/Explore subagents for analysis; main Claude Code session for edits |
+| Assistant model | claude-opus-5-5 |
+| Starting point | week-08 |
+| Baseline commit | c2f9e71 |
+| Language (ts or js) | ts |
+| Vitest version | 3.2.4 |
+| Where I ran the tests | my computer (Windows 11, Node v24.14.1), run by the Claude Code agent |
 
 ### 1.1 Baseline run
 
-<!-- Before you change anything: run the tests of your starting point inside app/ and paste the
-     REAL output. No tests yet (starter, sis-03)? Paste the run anyway: Vitest prints
-     "No test files found". That is your honest "original" number, 0/0. -->
+Run in `sis-04/app/` right after the baseline commit, before any change (only the absolute path is shortened to `.../`).
 
 ```text
-(paste here)
+RUN  v3.2.4 .../se-practice/sis-04/app
+
+ ✓ src/booking.test.ts (22 tests) 16ms
+
+ Test Files  1 passed (1)
+      Tests  22 passed (22)
+   Start at  18:16:45
+   Duration  1.69s (transform 226ms, setup 0ms, collect 243ms, tests 16ms, environment 0ms, prepare 624ms)
 ```
 
 ## 2. Context for the assistant
 
 ### 2.1 Repository map
 
-<!-- The concise map you gave the assistant: the files that matter and one line each on what
-     they do. A tree is fine:  src/App.tsx — the page, holds the rooms and the form … -->
-
 ```text
-(paste here)
+sis-04/app/
+├── src/booking.ts       canBook({ start, end, now, blocked, bookings }): the AC1–AC5 rule, minutes after midnight
+├── src/booking.test.ts  22 Vitest tests of canBook (T01–T14, X1–X2, AC5, PAST, REPEAT, REJECTED, BUG-A, BUG-B)
+├── src/App.tsx          the page: ROOMS (2 rooms) and the Room type, form state, toMinutes()/fmt(),
+│                        check() (validates the form, calls canBook) and all rendering
+├── src/main.tsx         React entry point
+├── src/index.css        layout, max-width: 480px media query for phones
+└── package.json         scripts: dev, build (tsc && vite build), preview, test (vitest run)
 ```
 
 ### 2.2 The context message as sent
 
-<!-- The whole first message of your analysis chat: the map, AC1–AC6, F1–F5 and the constraints
-     (no login, payments, live APIs or database; fictional data only). Unedited. -->
+Sent on 2026-11-22 to a fresh read-only Claude Code subagent (Plan mode, cannot edit). A first line with the absolute project path was added in front of it so the subagent could find the files.
 
 ```text
-(paste here)
+You are reviewing a small React + TypeScript (Vite, Vitest 3.2.4) project: the Smart Campus Room Availability Checker. Project folder: sis-04/app. Do not write code yet and do not edit any file.
+
+Repository map:
+- src/booking.ts — canBook({ start, end, now, blocked, bookings }): the AC1–AC5 rule, minutes after midnight
+- src/booking.test.ts — 22 Vitest tests of canBook (T01–T14, X1–X2, AC5, PAST, REPEAT, REJECTED, BUG-A, BUG-B)
+- src/App.tsx — the page: holds the room data (ROOMS, 2 rooms, type Room declared here), the form state, toMinutes()/fmt() time helpers, check() which validates the form and calls canBook, and all rendering
+- src/main.tsx — React entry point
+- src/index.css — layout, including a max-width: 480px media query
+- package.json — scripts dev, build (tsc && vite build), preview, test (vitest run)
+
+Acceptance criteria to preserve:
+AC1 Reject start ≥ end and requests in the past.
+AC2 Enforce the maximum allowed duration (120 minutes).
+AC3 Reject a blocked room.
+AC4 Reject overlaps; allow bookings that only touch at endpoints.
+AC5 Return Available / Unavailable without changing booking data.
+AC6 Clear, responsive feedback on desktop and mobile.
+
+New requirements (a catalog of at least four fictional rooms; each room has id, name, capacity, equipment list, blocked status and its own bookings; show only rooms that satisfy the selected requirements; the availability check must use the chosen room's bookings):
+F1 Capacity filter: room capacity must be greater than or equal to the requested attendees.
+F2 Equipment filter: the room must contain ALL selected required items.
+F3 A blocked room cannot be reported as available.
+F4 Show a clear empty state when no rooms match.
+F5 Changing the selected room must refresh the availability result appropriately.
+
+Fixed target layout: src/rooms.ts (Room type + ROOMS), src/filter.ts (filterRooms(rooms, { attendees, equipment })), src/booking.ts (canBook unchanged + checkRoom(rooms, roomId, { start, end, now }) that calls canBook with that room's own blocked and bookings), the UI imports the rules and holds no room data or rule of its own.
+
+Constraints: no login, payments, live APIs or database; fictional data only; no new runtime dependencies unless justified.
+
+Please give me: (1) at least three maintainability risks in the CURRENT code, each with the file/function reference and what in the code shows it; (2) a numbered plan of small, safe steps (smallest first), each step keeping the 22 existing tests green, and saying which test to write first for each new rule. I want a plan, not a full rewrite, and no code yet.
 ```
 
 ## 3. Codebase analysis (Task 1)
 
 ### 3.1 Maintainability risks
 
-<!-- At least three, found in YOUR starting code. "Where" names a file or a function(),
-     e.g. src/App.tsx, check(). Evidence is what you saw, not what the assistant said.
-     Priority: High / Medium / Low. -->
+Each row was checked in the baseline code (`git show c2f9e71:sis-04/app/src/App.tsx`, `.../booking.ts`).
 
 | # | Risk | Where (file / function) | Evidence | Priority |
 | --- | --- | --- | --- | --- |
-| 1 | (write here) | (write here) | (write here) | High / Medium / Low |
-| 2 | (write here) | (write here) | (write here) | High / Medium / Low |
-| 3 | (write here) | (write here) | (write here) | High / Medium / Low |
+| 1 | The room's own `blocked` field is never read; a global "Room blocked" checkbox decides, so F3 cannot hold per room | `src/App.tsx`, `App()` / `check()` | `const [blocked, setBlocked] = useState(false)`; `check()` calls `canBook({ ..., blocked, bookings: room.bookings })`; `room.blocked` appears nowhere | High |
+| 2 | Room data, the `Room` type and the time helpers live inside the UI file, so no test can import them without React | `src/App.tsx`, `ROOMS`, `toMinutes()`, `fmt()` | `type Room` and `const ROOMS: Room[]` are declared in App.tsx; `booking.ts` repeats the interval shape inline as `{ start: number; end: number }[]` | High |
+| 3 | `check()` sets the "end must be after start" error but does not return, so the page shows the error and "Unavailable" together (AC6) | `src/App.tsx`, `check()` | the `if (!(s < e)) { setError(...) } else { setError('') }` block falls through to `canBook(...)` and `setResult(ok)` | Medium |
+| 4 | The result is only cleared inside `check()`; a room change leaves the old verdict on screen (F5), and `ROOMS.find(...)!` will crash once a filter can remove the selected room (F4) | `src/App.tsx`, `App()` | `setResult(null)` only in `check()`; `const room = ROOMS.find(r => r.id === roomId)!;` | Medium |
+| 5 | A stale comment invites an AC5 regression | `src/booking.ts`, `canBook()` | the line `// keep the room's list current with the slot that was just found free` sits right before `return true` | Low |
 
 ### 3.2 Improvement plan — before editing
 
-<!-- Numbered, in the order you will do it, smallest safe step first. Written BEFORE you change
-     code: the commit that adds this section comes before the commit that changes app/src. -->
-
-1. (write here)
-2. (write here)
-3. (write here)
+1. Move `Room`/`Interval` and the catalog out of App.tsx into `src/rooms.ts` and grow it to four fictional rooms with id, name, capacity, equipment, blocked and bookings (risk 2). The 22 tests stay green; `tsc` forces every field.
+2. Add `checkRoom(rooms, roomId, { start, end, now })` to `src/booking.ts`, calling the unchanged `canBook` with the chosen room's own `blocked` and `bookings`; write the F3, F5 and unknown-id tests first (risk 1).
+3. Add `filterRooms(rooms, { attendees, equipment })` in `src/filter.ts`, tests first: F1 with the B5/B6 capacity boundaries, then F2 (ALL items), then the empty result behind F4.
+4. Rewire the page: remove the global blocked checkbox, build the room list from `filterRooms`, show an empty state, derive the verdict from `checkRoom` for the selected room so a room change refreshes it (risks 1, 3, 4, F4, F5).
+5. Move `toMinutes()`/`fmt()` into a small `src/time.ts`, return early on the reversed-interval error, delete the stale comment (risks 3, 5); add the INT test (`filterRooms` then `checkRoom`) and add B1–B4 to the titles of the existing boundary tests.
 
 ### 3.3 One AI suggestion I rejected or modified
 
 | Suggestion (as the assistant made it) | Decision | Why — with the AC, F-rule, test or file behind it |
 | --- | --- | --- |
-| (write here) | Rejected / Modified | (write here) |
-
+| "If you want automated F4/F5 UI tests, add `jsdom` and `@testing-library/react` as devDependencies" and "Clear `result` (and `error`) whenever roomId, a filter or a time input changes" | Modified | No new dependencies (constraints in §5 of the README, `package.json`): F4 is proved on `filterRooms` (empty array) and F5 on `checkRoom` with two rooms, both pure. Instead of clearing the result on a room change I derive it from `checkRoom` for the currently selected room after the first check, so F5 "refresh" shows the new room's verdict (screenshots `switch-a.png`/`switch-b.png`) instead of an empty result. |
 ## 4. Feature extension (Task 2)
 
 ### 4.1 What I added
