@@ -1,0 +1,28 @@
+
+ RUN  v3.2.4 .../se-practice/sis-04/app
+
+ ✓ src/catalog.test.ts (9 tests) 7ms
+ ✓ src/booking.test.ts (22 tests) 10ms
+
+⎯⎯⎯⎯⎯⎯ Failed Suites 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/filter.test.ts [ src/filter.test.ts ]
+Error: Cannot find module './filter' imported from '.../se-practice/sis-04/app/src/filter.test.ts'
+ ❯ src/filter.test.ts:2:31
+      1| import { test, expect } from 'vitest';
+      2| import { filterRooms } from './filter';
+       |                               ^
+      3| import { checkRoom } from './booking';
+      4| import type { Room } from './rooms';
+
+Caused by: Error: Failed to load url ./filter (resolved id: ./filter) in .../se-practice/sis-04/app/src/filter.test.ts. Does the file exist?
+ ❯ loadAndTransform node_modules/vite/dist/node/chunks/dep-BK3b2jBa.js:51969:17
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed | 2 passed (3)
+      Tests  31 passed (31)
+   Start at  18:20:16
+   Duration  1.26s (transform 146ms, setup 0ms, collect 150ms, tests 17ms, environment 1ms, prepare 1.50s)
+
