@@ -1,0 +1,30 @@
+You are reviewing a small React + TypeScript (Vite, Vitest 3.2.4) project: the Smart Campus Room Availability Checker. Project folder: sis-04/app. Do not write code yet and do not edit any file.
+
+Repository map:
+- src/booking.ts — canBook({ start, end, now, blocked, bookings }): the AC1–AC5 rule, minutes after midnight
+- src/booking.test.ts — 22 Vitest tests of canBook (T01–T14, X1–X2, AC5, PAST, REPEAT, REJECTED, BUG-A, BUG-B)
+- src/App.tsx — the page: holds the room data (ROOMS, 2 rooms, type Room declared here), the form state, toMinutes()/fmt() time helpers, check() which validates the form and calls canBook, and all rendering
+- src/main.tsx — React entry point
+- src/index.css — layout, including a max-width: 480px media query
+- package.json — scripts dev, build (tsc && vite build), preview, test (vitest run)
+
+Acceptance criteria to preserve:
+AC1 Reject start ≥ end and requests in the past.
+AC2 Enforce the maximum allowed duration (120 minutes).
+AC3 Reject a blocked room.
+AC4 Reject overlaps; allow bookings that only touch at endpoints.
+AC5 Return Available / Unavailable without changing booking data.
+AC6 Clear, responsive feedback on desktop and mobile.
+
+New requirements (a catalog of at least four fictional rooms; each room has id, name, capacity, equipment list, blocked status and its own bookings; show only rooms that satisfy the selected requirements; the availability check must use the chosen room's bookings):
+F1 Capacity filter: room capacity must be greater than or equal to the requested attendees.
+F2 Equipment filter: the room must contain ALL selected required items.
+F3 A blocked room cannot be reported as available.
+F4 Show a clear empty state when no rooms match.
+F5 Changing the selected room must refresh the availability result appropriately.
+
+Fixed target layout: src/rooms.ts (Room type + ROOMS), src/filter.ts (filterRooms(rooms, { attendees, equipment })), src/booking.ts (canBook unchanged + checkRoom(rooms, roomId, { start, end, now }) that calls canBook with that room's own blocked and bookings), the UI imports the rules and holds no room data or rule of its own.
+
+Constraints: no login, payments, live APIs or database; fictional data only; no new runtime dependencies unless justified.
+
+Please give me: (1) at least three maintainability risks in the CURRENT code, each with the file/function reference and what in the code shows it; (2) a numbered plan of small, safe steps (smallest first), each step keeping the 22 existing tests green, and saying which test to write first for each new rule. I want a plan, not a full rewrite, and no code yet.

@@ -1,0 +1,26 @@
+' diagrams/after.puml — the final code of sis-04/app.
+@startuml
+title After: rooms, booking, filter, time and the UI separated
+component "main.tsx" as Main
+component "App.tsx\n(UI: form state + rendering)" as App
+component "rooms.ts\nRoom, EQUIPMENT, ROOMS" as Rooms
+component "booking.ts\ncanBook(), checkRoom()" as Booking
+component "filter.ts\nfilterRooms()" as Filter
+component "time.ts\ntoMinutes(), fmt(), readTimes()" as Time
+component "booking.test.ts" as BookingTest
+component "catalog.test.ts" as CatalogTest
+component "filter.test.ts" as FilterTest
+Main --> App : renders
+App --> Rooms : ROOMS, EQUIPMENT
+App --> Filter : filterRooms()
+App --> Booking : checkRoom()
+App --> Time : readTimes(), fmt()
+Booking --> Rooms : Room type
+Filter --> Rooms : Room type
+BookingTest --> Booking : canBook()
+CatalogTest --> Booking : checkRoom()
+CatalogTest --> Rooms : Room type
+FilterTest --> Filter : filterRooms()
+FilterTest --> Booking : checkRoom()
+FilterTest --> Rooms : Room type
+@enduml

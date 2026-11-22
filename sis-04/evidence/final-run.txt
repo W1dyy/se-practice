@@ -1,0 +1,12 @@
+
+ RUN  v3.2.4 .../se-practice/sis-04/app
+
+ ✓ src/catalog.test.ts (10 tests) 4ms
+ ✓ src/booking.test.ts (22 tests) 8ms
+ ✓ src/filter.test.ts (9 tests) 5ms
+
+ Test Files  3 passed (3)
+      Tests  41 passed (41)
+   Start at  18:26:54
+   Duration  790ms (transform 82ms, setup 0ms, collect 152ms, tests 17ms, environment 1ms, prepare 907ms)
+

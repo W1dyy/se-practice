@@ -1,0 +1,10 @@
+
+ RUN  v3.2.4 .../se-practice/sis-04/app
+
+ ✓ src/booking.test.ts (22 tests) 16ms
+
+ Test Files  1 passed (1)
+      Tests  22 passed (22)
+   Start at  18:16:45
+   Duration  1.69s (transform 226ms, setup 0ms, collect 243ms, tests 16ms, environment 0ms, prepare 624ms)
+

@@ -1,0 +1,62 @@
+# SIS #04 — the declaration. FACTS ONLY: every explanation stays in report.md.
+#
+# Fill this in LAST, after your final run of the checker, then validate it:
+#     python tests/check_sis.py
+#     python tests/validate_submission.py
+#
+# Your checker numbers are re-run by the instructor at the head of your pull request.
+# Numbers that do not match what that commit produces cost the whole workflow criterion.
+# A FAIL you report honestly — here and under known_fails — costs nothing extra.
+#
+# Format rules: two spaces for indentation, never tabs. Leave the keys exactly as they are.
+
+schema: 1
+assignment: "sis-04"            # do not edit
+
+student:
+  name: "Bakhytzhan Amir"
+  student_id: "24B031694"
+  group: "MON 16:00-19:00"
+  github: "W1dyy"
+
+assistant:
+  tool: "Claude Code (read-only Plan/Explore subagents + main session)"
+  model: "claude-opus-5-5"
+
+project:                        # exactly as in report.md section 1
+  start_from: week-08
+  baseline_commit: "c2f9e71"
+  language: ts
+  vitest: "3.2.4"
+
+counts:                         # the checker prints most of these under --json "measured"
+  rooms: 4
+  tests_original: 22
+  tests_final: 41
+  risks: 5
+  exchanges: 3
+
+checker:                        # from your LAST run of python tests/check_sis.py
+  pass: 33
+  fail: 0
+  error: 0
+  commit: "8d842d5"
+                                # (normally the commit just before you commit this file — that is fine)
+  known_fails: []               # every check still FAIL or ERROR, as in report.md section 9, e.g. [E3]
+
+review_findings:
+  # Three or more. One line each, and each one names what it is about: an F-rule (F1-F5),
+  # an AC (AC1-AC6), a boundary test (B1-B6), INT, or a file.
+  # Worthless:        "The refactoring improved the code"
+  # Worth everything: "F2: the assistant's filter used equipment.some(), so a room with only a projector
+  #                    matched projector + whiteboard; the F2 test caught it"
+  - "F3: App.tsx passed the global blocked checkbox to canBook and never read room.blocked; checkRoom now uses the chosen room's flag, test F3 AC3"
+  - "F5: the assistant planned to clear the result on a room change; the result is derived from checkRoom instead, shown by switch-a and switch-b"
+  - "B6: the first test only used not.toContain, which an empty list also passes; the AI test review caught it and B6 now asserts ['r-lab', 'r-closed']"
+  - "INT: filterRooms then checkRoom on each match gives [true, false, false]; the blocked r-closed is listed but never available"
+
+honesty:
+  baseline_unchanged: yes
+  runs_unedited: yes
+  no_invented_metrics: yes
+  ai_usage_disclosed: yes
