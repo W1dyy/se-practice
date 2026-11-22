@@ -1,0 +1,90 @@
+diff --git a/week-10/app/src/App.tsx b/week-10/app/src/App.tsx
+index 61d2866..30d1ea4 100644
+--- a/week-10/app/src/App.tsx
++++ b/week-10/app/src/App.tsx
+@@ -1,9 +1,9 @@
+-import { canBook } from './booking';
++import { checkRequest } from './booking';
+ import { useState } from 'react';
+ 
+-// Starter for students with no Week 06 project. The availability decision lives INSIDE this
+-// component on purpose: Task 1 of Practice #07 is to extract it into src/booking.ts as
+-// canBook({ start, end, now, blocked, bookings }) without changing what the page does.
++// The availability decision (time parsing, validation, verdict) lives in src/booking.ts as
++// checkRequest(form, room), a pure function covered by src/booking.test.ts. This component only
++// holds form state and renders the outcome.
+ 
+ type Interval = { start: number; end: number };
+ type Room = { id: string; name: string; blocked: boolean; bookings: Interval[] };
+@@ -13,10 +13,6 @@ const ROOMS: Room[] = [
+   { id: 'b204', name: 'Room B-204', blocked: false, bookings: [] },
+ ];
+ 
+-const toMinutes = (value: string) => {
+-  const [h, m] = value.split(':').map(Number);
+-  return h * 60 + m;
+-};
+ const fmt = (m: number) => `${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
+ 
+ export default function App() {
+@@ -32,22 +28,9 @@ export default function App() {
+   const room = ROOMS.find(r => r.id === roomId)!;
+ 
+   function check() {
+-    setResult(null);
+-    if (!start || !now || (!end && !endOfDay)) {
+-      setError('Fill in the current time, the start and the end.');
+-      return;
+-    }
+-    const s = toMinutes(start);
+-    const e = endOfDay ? 1440 : toMinutes(end);
+-    const n = toMinutes(now);
+-    if (!(s < e)) {
+-      setError('The end time must be after the start time.');
+-    } else {
+-      setError('');
+-    }
+-
+-    const ok = canBook({ start: s, end: e, now: n, blocked, bookings: room.bookings });
+-    setResult(ok);
++    const outcome = checkRequest({ now, start, end, endOfDay }, { blocked, bookings: room.bookings });
++    setError(outcome.error);
++    setResult(outcome.result);
+   }
+ 
+   return (
+diff --git a/week-10/app/src/booking.ts b/week-10/app/src/booking.ts
+index d034fd1..9ea9518 100644
+--- a/week-10/app/src/booking.ts
++++ b/week-10/app/src/booking.ts
+@@ -15,3 +15,30 @@ export function canBook({ start, end, now, blocked, bookings }: {
+   // keep the room's list current with the slot that was just found free
+   return true;
+ }
++
++export type BookingForm = { now: string; start: string; end: string; endOfDay: boolean };
++export type RoomState = { blocked: boolean; bookings: { start: number; end: number }[] };
++export type CheckOutcome = { error: string; result: boolean | null };
++
++// Parses an "HH:MM" value from <input type="time"> into minutes since midnight.
++const toMinutes = (value: string) => {
++  const [h, m] = value.split(':').map(Number);
++  return h * 60 + m;
++};
++
++// The page's whole availability decision: validate the form, parse the times, then ask canBook.
++// Pure: reads `room` but never changes it. A validation error always comes with result: null,
++// so the page never shows an error and a verdict together.
++export function checkRequest(form: BookingForm, room: RoomState): CheckOutcome {
++  if (!form.start || !form.now || (!form.end && !form.endOfDay)) {
++    return { error: 'Fill in the current time, the start and the end.', result: null };
++  }
++  const start = toMinutes(form.start);
++  const end = form.endOfDay ? 1440 : toMinutes(form.end);
++  const now = toMinutes(form.now);
++  if (!(start < end)) {
++    return { error: 'The end time must be after the start time.', result: null };
++  }
++  const result = canBook({ start, end, now, blocked: room.blocked, bookings: room.bookings });
++  return { error: '', result };
++}
